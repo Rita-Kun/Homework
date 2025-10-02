@@ -1,0 +1,58 @@
+import matplotlib.ticker as ticker
+import numpy as np
+import matplotlib.pyplot as plt
+x = [0, 1, 2, 3, 4, 5]
+y = [0, 20, 30, 45, 50, 60]
+plt.plot(x, y, color='green', marker='3', markersize=5)
+ax = plt.gca()
+ax.set_xlim(1, 4)
+ax.set_ylim(0, 60)
+
+ax.set_xticks([0, 1, 2, 3, 4, 5])
+ax.set_yticks([0, 10, 20, 30, 40, 50, 60])
+
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(0.2))  
+ax.yaxis.set_minor_locator(ticker.MultipleLocator(2)) 
+
+#ax.xaxis.set_minor_formatter(ticker.FormatStrFormatter('%g')) 
+#ax.yaxis.set_minor_formatter(ticker.FormatStrFormatter('%g')) 
+
+plt.scatter(x, y, color='red', marker='1')
+
+plt.xlabel('x-axis') 
+plt.ylabel('y-axis') 
+plt.title('Graph')
+plt.grid(True, which = 'both', linestyle = 'dashed')
+plt.show()
+
+
+
+
+import matplotlib.ticker as ticker
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = ['pears', 'tomatoes', 'cucmbers', 'oranges', 'apples']
+y = [31, 26, 33, 30, 40]
+
+plt.bar(x, y, label='sales report', alpha=0.2 )
+plt.plot(x, y, color='purple', marker='o', markersize=7)
+plt.xlabel('goods')
+plt.ylabel('amount')
+plt.title('Bar chart')
+plt.legend(loc='upper center')
+plt.show()
+
+
+
+
+import matplotlib.ticker as ticker
+import numpy as np
+import matplotlib.pyplot as plt
+amount=[1, 2, 1, 4]
+labels = ['cats','dogs', 'frogs','other']
+color_ = ["blue", "violet", "purple", "pink"]
+plt.title('What will I eat tomorrow?')
+plt.pie(amount, labels=labels, colors=color_,  autopct='%1.f%%')
+plt.title("What will i eat tomorrow?")
+plt.show()

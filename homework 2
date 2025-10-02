@@ -35,8 +35,8 @@ import matplotlib.pyplot as plt
 x = ['pears', 'tomatoes', 'cucmbers', 'oranges', 'apples']
 y = [31, 26, 33, 30, 40]
 
-plt.bar(x, y, label='sales report', alpha=0.2 )
-plt.plot(x, y, color='purple', marker='o', markersize=7)
+plt.bar(x, y, label='sales report', alpha=1, color='green' )
+plt.plot(x, y, color='pink', marker='s', markersize=10)
 plt.xlabel('goods')
 plt.ylabel('amount')
 plt.title('Bar chart')

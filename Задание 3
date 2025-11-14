@@ -1,0 +1,78 @@
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((600, 400))
+pygame.display.set_caption("Простейшая игра")
+font = pygame.font.SysFont(None, 30)
+
+score = 0
+x1 = 550
+y1 = 50
+speed1  = 0.1
+
+
+class Ball:
+    def __init__(self, ball_x, ball_y, radius, color, ball_vx, ball_vy, score):
+        self.x = ball_x
+        self.y = ball_y
+        self.radius = radius
+        self.color = color
+        self.vx = ball_vx
+        self.vy = ball_vy
+        self.score = score
+
+    def update(self, x0, y0):
+        self.x += self.vx
+        self.y += self.vy
+        if self.x - self.radius < 0:
+            self.vx = -self.vx
+        if self.y - self.radius < 0 or self.y + self.radius > 400:
+            self.vy = -self.vy
+        if (self.x + self.radius >= x0) and (self.x - self.radius <= x0 + 50) and (self.y + self.radius > y0) and (self.y - self.radius <= y0 + 70):
+            if self.vx >0:
+                self.vx = -self.vx  
+                self.score += 1
+        if self.x - self.radius > 600:
+            return False
+        return True
+            
+    def draw(self):
+        pygame.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.radius)
+
+ball = Ball(50, 50, 20, (0,0,0), 0.2, 0.2, 0)
+
+end = False
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  
+            running = False
+
+    if not end:
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            y1 -= speed1
+        if keys[pygame.K_DOWN]:
+            y1 += speed1
+        y1 = max(0, min(400 - 70, y1))
+        if not ball.update(x1, y1):
+            end = True
+        
+
+    screen.fill((200, 255, 1)) 
+    pygame.draw.polygon(screen, (0,255,100), [(x1,y1),(x1+50,y1),(x1+50,y1+70),(x1,y1+70)])
+    ball.draw()
+
+    text = font.render(f"Score: {ball.score}", True, (255, 0, 255)) 
+    screen.blit(text, (10, 10))     
+
+
+    if end:
+        text_end = font.render("Вы проиграли!", True, (255, 0, 0))
+        screen.blit(text_end, (10, 10)) 
+        running = False
+        
+
+    pygame.display.flip()                   
+
+pygame.quit()    

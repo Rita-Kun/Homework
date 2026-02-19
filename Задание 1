@@ -1,3 +1,4 @@
+Задание 1
 import matplotlib.pyplot as plt
 import networkx as nx
 G = nx.Graph()
@@ -29,3 +30,46 @@ nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=12)
 plt.title("Задание 1")
 plt.show()
 
+---------------------------------------
+Задание 2
+
+def ways_num(graph, start, end):
+    if start == end:
+            return 1
+    if start == None:
+         return 0
+    else:
+        count = 0
+        for neighbour in graph[start]:
+            count += ways_num(graph, neighbour, end)
+        return count
+
+
+graph = {
+    '1':['2','3','4','5'],
+    '2':['3','6'],
+    '3':['6','8'],
+    '4':['3','8'],
+    '5':['4','8','9'],
+    '6':['8','7'],
+    '7':[None],
+    '8':['7'],
+    '9':['7','8'],
+}
+
+print(ways_num(graph, '1', '3') * ways_num(graph, '3', '7'))
+#если нужно несколько раз считать start и end 
+#a=int(input())
+#b=int(input())
+
+#print(ways_num(graph, str(a),str(b)))
+---------------------------------
+Граф ко второму заданию:
+
+G = nx.DiGraph()
+edges =  [(1,2),(2,3),(2,6),(1,3),(1,4),(1,5),(5,4),(4,3),(4,8),(3,8),(3,6),(6,8),(6,7),(5,8),(8,7),(5,9),(9,8),(9,7)]
+G.add_edges_from(edges)
+
+plt.figure(figsize=(5, 5))
+nx.draw(G,  with_labels=True, node_color='lightblue', edge_color='black', width=2, arrows=True)
+plt.show()
